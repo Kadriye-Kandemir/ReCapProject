@@ -46,17 +46,9 @@ namespace ConsoleUI
             //    Console.WriteLine("Günlük ücreti: " + car.DailyPrice);
             //    Console.WriteLine("Açıklaması: " + car.Descriptions);
             //    Console.WriteLine("********");
-            //}
-            //List<Car> cars = new List<Car>();
-            //cars = carManager.GetById(id: 1005);
+            
 
-            //foreach (var car in cars)
-            //{
-            //    Console.WriteLine(car.Id);
-            //}
-
-            //carManager.Delete(new Car { Id=1005});
-
+            
             Console.ReadLine();
         }
 
