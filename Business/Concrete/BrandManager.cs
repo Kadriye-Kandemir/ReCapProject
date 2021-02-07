@@ -35,16 +35,17 @@ namespace Business.Concrete
             Console.WriteLine("Marka başarıyla silindi.");
         }
 
+        public Brand Get(int id)
+        {
+            return _brandDal.Get(p => p.BrandId == id);
+        }
+
         public List<Brand> GetAll()
         {
             return _brandDal.GetAll();
         }
 
-        public List<Brand> GetByBrandId(int id)
-        {
-            return _brandDal.GetAll(b => b.BrandId == id);
-        }
-
+       
         public void Update(Brand brand)
         {
             if (brand.BrandName.Length >= 2)
@@ -58,5 +59,6 @@ namespace Business.Concrete
             }
         }
 
+       
     }
 }

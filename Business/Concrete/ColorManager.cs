@@ -28,14 +28,14 @@ namespace Business.Concrete
             Console.WriteLine("Renk başarıyla silindi.");
         }
 
+        public Color Get(int id)
+        {
+            return _colorDal.Get(p => p.ColorId == id);
+        }
+
         public List<Color> GetAll()
         {
             return _colorDal.GetAll();
-        }
-
-        public List<Color> GetByColorId(int id)
-        {
-            return _colorDal.GetAll(c => c.ColorId == id);
         }
 
         public void Update(Color color)

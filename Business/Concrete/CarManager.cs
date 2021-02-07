@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -56,11 +57,7 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
         }
 
-        public Car GetById(int id)
-        {
-            return _carDal.Get(c => c.Id == id);
-        }
-
+       
         public List<Car> GetByModelYear(string year)
         {
             return _carDal.GetAll(c => c.ModelYear.Contains(year) == true);
@@ -79,5 +76,14 @@ namespace Business.Concrete
             }
         }
 
+        public Car Get(int id)
+        {
+            return _carDal.Get(p => p.Id == id);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
     }
 }
