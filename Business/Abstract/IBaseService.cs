@@ -1,16 +1,18 @@
 ﻿using Core.Entities;
+using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Abstract
 {
     public interface IBaseService<T> where T :IEntity, new() 
     {
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        List<T> GetAll();
-        T Get(int id);
+        IResult Add(T entity);
+        IResult Update(T entity);
+        IResult Delete(T entity);
+        IDataResult<List<T>> GetAll();
+        IDataResult<T> Get(int id);
     }
 }

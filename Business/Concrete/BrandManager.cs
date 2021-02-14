@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,46 +18,46 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
             if (brand.BrandName.Length >= 2)
             {
                 _brandDal.Add(brand);
-                Console.WriteLine("Marka başarıyla eklendi.");
+                return new SuccessResult(Messages.AddSuccessMessage);
             }
             else
             {
-                Console.WriteLine("Marka ismi minimum 2 karakter olmalı!");
+                return new ErrorResult(Messages.AddErrorMessage + "=> Marka ismi 2 haften büyük olmalıdır!");
             }
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            Console.WriteLine("Marka başarıyla silindi.");
+            return new SuccessResult(Messages.DeleteSuccessMessage);
         }
 
-        public Brand Get(int id)
+        public IDataResult<Brand> Get(int id)
         {
-            return _brandDal.Get(p => p.BrandId == id);
+            return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == id),Messages.SuccessMessage);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.Listed);
         }
 
-       
-        public void Update(Brand brand)
+
+        public IResult Update(Brand brand)
         {
             if (brand.BrandName.Length >= 2)
             {
                 _brandDal.Update(brand);
-                Console.WriteLine("Marka başarıyla güncellendi.");
+                return new SuccessResult(Messages.UpdateSuccessMessage);
             }
             else
             {
-                Console.WriteLine("Markanın karakter uzunluğu minimum 2 olmalı!");
+                return new ErrorResult(Messages.UpdateErrorMessage);
             }
         }
 
