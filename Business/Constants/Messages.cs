@@ -33,6 +33,7 @@ namespace Business.Constants
 
         public static string Listed = "Listelendi";
         public static string SuccessMessage = "İşlem başarılı";
+        public static string ErrorMessage = "İşlem başarısız";
         public static string MaintenanceTime = "Bakımdayız";
 
     }

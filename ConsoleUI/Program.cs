@@ -1,4 +1,6 @@
 ﻿using Business.Concrete;
+using Business.Constants;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -25,21 +27,64 @@ namespace ConsoleUI
             //BrandUpdateTest();  //Bmw güncelleme çalıştırıldı daha önce
             //ColorAddTest();  //Yeni renk eklendi
             //ColorDeleteTest();  //Eklenen kırmızı renk silindi
-
+            //RentDetailsTest();
+            UserAddition();
 
             Console.ReadLine();
+        }
+
+        private static void UserAddition()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            Console.WriteLine("First Name: ");
+            string userNameForAdd = Console.ReadLine();
+            Console.WriteLine("Last Name: ");
+            string userSurnameForAdd = Console.ReadLine();
+            Console.WriteLine("Email Name: ");
+            string userEmailForAdd = Console.ReadLine();
+            Console.WriteLine("Password Name: ");
+            string userPasswordForAdd = Console.ReadLine();
+
+
+            User userForAdd = new User
+            {
+                FirstName = userNameForAdd,
+                LastName = userSurnameForAdd,
+                Email = userEmailForAdd,
+                Password = userPasswordForAdd
+
+            };
+            userManager.Add(userForAdd);
+        }
+        private static void RentDetailsTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var xxx = rentalManager.GetRentalDetails();
+            if (xxx.Success == true)
+            {
+                foreach (var rent in xxx.Data)
+                {
+                    Console.WriteLine("CustomerName:{0} - CarName:{1} - CompanyName:{2} - RentDate:{3} - ReturnDate:{4}",
+                        rent.CustomerName, rent.CarName, rent.CompanyName, rent.RentDate, rent.ReturnDate);
+                }
+                Console.WriteLine(Messages.Listed);
+            }
+            else
+            {
+                Console.WriteLine(Messages.ErrorMessage);
+            }
         }
 
         private static void ColorDeleteTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            colorManager.Delete(new Color { ColorId = 2004});
+            colorManager.Delete(new Color { ColorId = 3002});
         }
 
         private static void ColorAddTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            Console.Write("Enter Color name: ");
+            Console.Write("Enter Color name: "); 
             string addedColor = Console.ReadLine();
             colorManager.Add(new Color {ColorName = addedColor });
             
