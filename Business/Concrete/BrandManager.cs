@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,15 +22,11 @@ namespace Business.Concrete
 
         public IResult Add(Brand brand)
         {
-            if (brand.BrandName.Length >= 2)
-            {
-                _brandDal.Add(brand);
-                return new SuccessResult(Messages.AddSuccessMessage);
-            }
-            else
-            {
-                return new ErrorResult(Messages.AddErrorMessage + "=> Marka ismi 2 haften büyük olmalıdır!");
-            }
+            ValidationTool.Validate(new BrandValidator(), brand);
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.AddSuccessMessage);
+
+
         }
 
         public IResult Delete(Brand brand)
@@ -39,28 +37,22 @@ namespace Business.Concrete
 
         public IDataResult<Brand> Get(int id)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == id),Messages.SuccessMessage);
+            return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == id), Messages.SuccessMessage);
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.Listed);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.Listed);
         }
 
 
         public IResult Update(Brand brand)
         {
-            if (brand.BrandName.Length >= 2)
-            {
-                _brandDal.Update(brand);
-                return new SuccessResult(Messages.UpdateSuccessMessage);
-            }
-            else
-            {
-                return new ErrorResult(Messages.UpdateErrorMessage);
-            }
+            _brandDal.Update(brand);
+            return new SuccessResult(Messages.UpdateSuccessMessage);
+
         }
 
-       
+
     }
 }
