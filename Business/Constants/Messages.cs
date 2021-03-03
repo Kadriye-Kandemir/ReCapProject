@@ -35,7 +35,15 @@ namespace Business.Constants
         public static string SuccessMessage = "İşlem başarılı";
         public static string ErrorMessage = "İşlem başarısız";
         public static string MaintenanceTime = "Bakımdayız";
-        internal static string CarImageLimitExceeded = "Resim limiti doldu";
+        public static string CarImageLimitExceeded = "Resim limiti doldu";
+        public static string AuthorizationDenied = "Yetkin YOK!";
+
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
 
     }

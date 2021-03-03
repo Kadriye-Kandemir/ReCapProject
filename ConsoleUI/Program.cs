@@ -1,5 +1,6 @@
 ﻿using Business.Concrete;
 using Business.Constants;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
@@ -46,15 +47,8 @@ namespace ConsoleUI
             string userPasswordForAdd = Console.ReadLine();
 
 
-            User userForAdd = new User
-            {
-                FirstName = userNameForAdd,
-                LastName = userSurnameForAdd,
-                Email = userEmailForAdd,
-                Password = userPasswordForAdd
-
-            };
-            userManager.Add(userForAdd);
+            
+           
         }
         private static void RentDetailsTest()
         {
